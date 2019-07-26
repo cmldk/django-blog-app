@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-15">
+
+        <!-- Title -->
+        <h3 class="mt-4">{{article.title}}</h3>
+
+        <!-- Author -->
+        <p class="lead">
+          <strong>Yazar :</strong>  {{article.author}}
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>{{article.created_date}}</p>
+
+        <hr>
+        {% if article.article_image.url %}
+        <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="">
+        {% else %}
+        {% endif %}
+
+        <!-- Preview Image -->
+         
+
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">
+          {{article.content|safe}}
+        </p>
+        <hr>
+        <h4>Yorumlar</h4>
+        <hr>
+        {% if comments %}
+        {% for comment in comments %}
+          <div class="media mb-1">
+            <img class="mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+              <h5 class="mt-0">{{comment.comment_author}}<p style="float: right;">{{comment.comment_date}}</p></h5>
+              <br>  
+              {{comment.comment_content}}
+            </div>
+          </div>
+          <br>
+        {% endfor %}
+        {% else %}
+        <div class="alert alert-danger">No Comments</div>
+        {% endif %}
+        <div >
+          <h5 class="card-header">Leave a Comment:</h5>
+          <br>
+          <div class="">
+            <form method="POST" action="{% url 'article:comment' article.id %}">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="formGroupExampleInput">Name</label>
+                <input name="comment_author" type="text" class="form-control" id="formGroupExampleInput" placeholder="">
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput">Comment</label>
+                <textarea name="comment_content" class="form-control" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-danger">Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock body %}

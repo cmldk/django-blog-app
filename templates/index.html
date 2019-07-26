@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="jumbotron text-center">
+        <h3>Yazılım Bloğuna Hoşgeldiniz</h3>
+        <br><br>
+        <p>Bu blogta geliştiriciler olarak blog yazılarınızı paylaşabilirsiniz ve insanlara yardımcı olabilirsiniz.</p>
+    </div>
+    <p>{{number1}}</p>
+    {% if number1 == 20 %}
+     <p>Sayımız 20 ye eşit</p>
+    {% else %}
+    <p>Sayımız 20 ye eşit değil</p>
+    {% endif %}
+    <ul>
+        {% for num in numbers %}
+        <li>{{num}}</li>
+        {% endfor %}
+    </ul>
+    <p>
+        {% if request.user.is_authenticated %}
+
+            Giriş Yapılmış, {{request.user.username}}
+        
+        {% else %}
+            Giriş Yapılmamış
+        {% endif %}
+    </p>
+    
+{% endblock body %}
