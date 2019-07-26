@@ -1,3 +1,2 @@
-# django-blog
-
+# Blog
 http://fblog.pythonanywhere.com/
